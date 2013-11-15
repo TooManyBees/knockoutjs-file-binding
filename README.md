@@ -29,5 +29,18 @@ to its observable. The <code>prohibited</code> key accepts either a string or ar
 (<code>text/javascript</code>, etc) will be ignored. <code>allowed</code> is similar, but ignores everything except
 the listed content types.
 
-The file binding internally creates a new FileReader object to do the encoding. To use an existing one and prevent
+The file binding internally creates a new <code>FileReader</code> object to do the encoding. To use an existing one and prevent
 a new one from being created, pass it through the <code>reader</code> key.
+
+```
+<input type="file" data-bind="file: {data: fileInput, reader: someReader}">
+
+<script>
+  var viewModel = {
+    fileInput: ko.observable(),
+    someReader: new FileReader()
+  }
+  
+  ko.applyBindings(viewModel);
+</script>
+```
