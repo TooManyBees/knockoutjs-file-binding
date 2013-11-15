@@ -56,6 +56,7 @@ ko.bindingHandlers['file'] = {
       if (allowed) {
         if (!allowed.some(function(type) { return type === file.type })) {
           console.log("File "+file.name+" is not an allowed type, ignoring.")
+          element.value = "";
           return;
         }
       }
@@ -63,6 +64,7 @@ ko.bindingHandlers['file'] = {
       if (prohibited) {
         if (prohibited.some(function(type) { return type === file.type })) {
           console.log("File "+file.name+" is a prohibited type, ignoring.")
+          element.value = "";
           return;
         }
       }
