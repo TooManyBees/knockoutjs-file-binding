@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File input binding for Knockout.js</title>
+  <script type="application/javascript" src="knockout-3.0.0.js"></script>
+  <script type="application/javascript" src="knockout-file-bind.js"></script>
+
+  <style>
+
+  h1 {
+    font-size: 125%;
+    font-family: sans-serif;
+  }
+
+  output {
+    font-family: monospace;
+    word-wrap: break-word;
+  }
+
+  </style>
+</head>
+<body>
+
+  <input
+    type="file"
+    data-bind="file: {data: fileInput, name: fileName, reader: someReader}"
+    >
+
+  <h1 data-bind="text: fileName"></h1>
+  <output data-bind="text: fileInput"></output>
+
+</body>
+</html>
+
+<script type="application/javascript">
+
+  var viewModel = {
+    fileInput: ko.observable(),
+    fileName: ko.observable(),
+    someReader: new FileReader()
+  }
+
+  ko.applyBindings(viewModel)
+</script>
