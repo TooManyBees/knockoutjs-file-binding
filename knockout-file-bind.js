@@ -53,10 +53,17 @@ ko.bindingHandlers['file'] = {
     var handler = function() {
       var file = element.files[0];
 
+      // Opening the file picker then canceling will trigger a 'change'
+      // event without actually picking a file.
+      if (file === undefined) {
+        fileContents(null)
+        return;
+      }
+
       if (allowed) {
         if (!allowed.some(function(type) { return type === file.type })) {
           console.log("File "+file.name+" is not an allowed type, ignoring.")
-          element.value = "";
+          fileContents(null)
           return;
         }
       }
@@ -64,12 +71,12 @@ ko.bindingHandlers['file'] = {
       if (prohibited) {
         if (prohibited.some(function(type) { return type === file.type })) {
           console.log("File "+file.name+" is a prohibited type, ignoring.")
-          element.value = "";
+          fileContents(null)
           return;
         }
       }
 
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(file); // A callback (above) will set fileContents
       if (typeof fileName === "function") {
         fileName(file.name)
       }
