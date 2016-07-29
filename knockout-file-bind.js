@@ -90,7 +90,7 @@
     }
   }
   
-  if (define && typeof define === 'function' && define.amd)
+  if (define && (typeof define === 'function') && define.amd)
     define(['knockout'], factory);
   } else {
     factory(ko);
